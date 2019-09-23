@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<style>
+		@charset "UTF-8";
+
+		body{
+			background-color: #252526;
+		}
+
+		label{
+			color: white;
+		}
+
+		#mostrar {
+			color: white;
+		}
+
+		#soma {
+			color: white;
+		}
+
+		#selecionar{
+			color: white;
+			background-color: #454547;
+			
+			padding: 0.5%;
+			border: none;
+			width: 95%;
+			height: 20%;
+		}
+
+		#numeroDados{
+			color: white;
+			background-color: #454547;
+			
+			padding: 0.5%;
+			border: none;
+			width: 95%;
+		}
+
+		#botao{
+			border-color: #161616;
+			background-color: #42f4bc;
+			border-radius: 7%;
+			padding: 0.5%;
+			width: 30%;
+			font-weight: bold;
+			padding: 0.8%;
+			
+		}
+	</style>
+
+	<script type="text/javascript">
+
+		function mostrar() {
+			var dado = document.getElementById('selecionar').value;  // seleciona o tipo de dado(que contem um value)
+			var soma = 0;
+			var quantidade = document.getElementById('numeroDados').value; //pega a quantidade de dados
+			var vetor = [quantidade];  //define o tamanho do vetor de acordo com a quantidade de dados
+			var vetor2 = [quantidade];  //define o tamanho do vetor de acordo com a quantidade de dados
+
+			//estrutura de repetição pra gerar um numero aleatorio e inserir no vetor
+			for (var y = 0; y <= quantidade; y++){
+				vetor[y] = y; //pega o vetor na posição de y e insere o valor de y
+				
+				var rand_dado = Math.floor((Math.random() * dado) + 1); //gera um numero aleatorio de acordo com o valor da variavel dado
+				
+				vetor2[y] = rand_dado; //insere o valor aleatorio de rand_dado no 2º vetor na posição y
+				
+			}
+
+			//Estrutura de repetição que pega as informações de todas as posições do vetor2 e soma
+			for(var i = 1; i <= quantidade; i++){
+				soma = soma + vetor2[i];
+			}
+
+
+			var texto = "";  //lista que insere um valor de espaço como string
+
+			//estrutura de repetição para printar os valores
+			for (var z = 1; z <= quantidade; z++){
+				//pega o valor do vetor na posição z + uma string + o valor 
+				//aleatorio do vetor 2 na posição z + quebra de linha
+				texto += vetor[z] + "º dado: " + vetor2[z] + "<br>"; 
+			}
+
+			//imprime o numero na tela
+			document.getElementById('mostrar').innerHTML = texto;
+			document.getElementById('soma').innerHTML = "Total: " + soma;
+
+
+		}
+	</script>
+
+	<title>RollRPG</title>
+</head>
+<body>
+	<font color="white">v.1.2</font>
+	<div id="div1" align="center">
+		<label>Escolha o dado:</label><br>
+		<select id="selecionar">
+			<option value="3">D3</option>
+			<option value="4">D4</option>
+			<option value="6">D6</option>
+			<option value="9">D9</option>
+			<option value="12">D12</option>
+			<option value="20">D20</option>
+			<option value="100">D100</option>
+		</select>
+		<br>
+	
+		<label>Número de dados:</label><br><input type="text" id="numeroDados" value="1" />
+		<br>
+		<input type="button" id="botao" name="rolar" value="rolar!" onclick="mostrar()" />
+		<p id="mostrar"></p>
+		<p id="soma"></p>
+	</div>
+</body>
+</html>
